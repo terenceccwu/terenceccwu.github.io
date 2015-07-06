@@ -1,0 +1,13 @@
+.black-box {
+	background-color: black;
+	color: white;
+}
+
+.grey-box {
+	background-color: #eee;
+	color:black;
+}
+
+body {
+	padding-top: 70px;
+}
