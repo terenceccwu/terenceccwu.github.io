@@ -13,15 +13,9 @@ for(var i = 0; i < 6 ; i++)
 
 var count = 0;
 function changecontent() {
-		if(count == 0) {
-			document.getElementById("image_frame").innerHTML = "<center><img id='the_image' width=300px height=300px src=\"./images/"+ 0 +".jpg\"></center>";
-			
-		} else {
-			var x = document.getElementById("the_image");
-			x.setAttribute("src","./images/" + count + ".jpg");
-		}
-
+		var x = document.getElementById("the_image");
+		x.setAttribute("src","./images/" + count + ".jpg");
 		count = (count + 1) % 6;
 }
 
-document.getElementById("image_frame").addEventListener("click", changecontent);
+document.getElementById("the_image").addEventListener("click", changecontent);
