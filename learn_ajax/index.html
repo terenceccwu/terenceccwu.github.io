@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Power of Asynchronous Programming in JavaScript</h2>
+<button type="button" onclick="counting()">Start Counting</button>
+<button type="button" onclick="loadDoc()">Send HTTP Request</button>
+<button type="button" onclick="clearOutput()">Clear Ouput</button>
+<p id="demo" style="font-size:20px;"></p>
+
+
+<script>
+function loadDoc() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (xhttp.readyState == 1) {
+      document.getElementById("demo").innerHTML += "sending Request...<br>";
+    }
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
+      document.getElementById("demo").innerHTML += xhttp.response + "<br>";
+    }
+  };
+  xhttp.open("GET", "https://api.ipify.org?format=json", true);
+  xhttp.send();
+}
+
+function counting() {
+  var i = 1;
+  for(;i<10;i++)
+  {
+    myprint(i);
+  }
+
+  function myprint(num){
+    setTimeout(function(){document.getElementById("demo").innerHTML += num + "<br>";}, 500*i);
+  }  
+}
+
+function clearOutput() {
+  document.getElementById("demo").innerHTML = "";
+}
+
+
+</script>
+
+</body>
+</html>
