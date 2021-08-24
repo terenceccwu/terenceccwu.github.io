@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <link rel="apple-touch-icon" type="image/png"
+        href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="shortcut icon" type="image/x-icon"
+        href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type=""
+        href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg"
+        color="#111" />
+
+
+    <title>Whatsapp Dialer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="white" />
+
+    <link rel='stylesheet' href='https://unpkg.com/normalize.css@8.0.1/normalize.css'>
+
+    <style>
+        .clearfix:after {
+            content: " ";
+            /* Older browser do not support empty content */
+            visibility: hidden;
+            display: block;
+            height: 0;
+            clear: both;
+        }
+
+        * {
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        }
+
+        .position--fixed {
+            position: fixed;
+        }
+
+        .number-input {
+            padding-bottom: 100px;
+            height: 41px; // keep height even when text is empty
+        }
+
+        .text {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        .text--title {
+            font-size: 36px;
+        }
+
+        .text--center {
+            text-align: center;
+        }
+
+        .btn {
+            width: 75px;
+            height: 75px;
+            background-color: #e5e5e5;
+            border-radius: 50%;
+
+            cursor: pointer;
+            outline: 0;
+            border: 0;
+
+        }
+
+        .btn__text {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            padding-top: 17px;
+            text-align: center;
+            font-size: 36px;
+
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+
+        .btn--empty {
+            background: none;
+            cursor: auto;
+        }
+
+        .btn--success {
+            background-color: #3DC55e;
+        }
+
+        .btn--success .btn__text {
+            color: white;
+        }
+
+        .btn--asterisk .btn__text {
+            font-size: 42px;
+            padding-top: 20px;
+        }
+
+        .btn--pound .btn__text {
+            padding-top: 20px;
+        }
+
+        .main-container {
+            position: fixed;
+            width: 100%;
+            margin-top: 56px;
+        }
+
+        .grid {}
+
+        .grid__cell {
+            float: left;
+            margin-bottom: 16px;
+        }
+
+        .grid__cell:not(:nth-child(3n)) {
+            margin-right: 25px;
+        }
+
+        .grid__cell:nth-child(3n + 1) {
+            clear: left;
+        }
+
+        .ripple {
+            background-position: center;
+            transition: background 0.5s;
+        }
+
+        .ripple:active {
+            background-color: #b2b1b1;
+            background-size: 100%;
+            transition: background 0s;
+        }
+
+        .numpad-container {
+            margin: 0 auto;
+            width: max-content;
+        }
+
+        .back-btn {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .back-btn__icon {
+            margin-top: 20px;
+            position: absolute;
+            left: 22px;
+            top: 0;
+            width: 33px;
+            height: 24px;
+            padding-left: 5px;
+            border-radius: 3px;
+            background: #e2e2e2;
+            clip-path: polygon(30% 0%, 100% 1%, 100% 100%, 30% 100%, 0% 50%);
+        }
+
+        .back-btn__icon:after {
+            display: block;
+            content: "";
+            position: absolute;
+            top: 4px;
+            left: 14px;
+            right: 7px;
+            bottom: 4px;
+            background: #100a09;
+            -webkit-clip-path: polygon(20% 10%,
+                    10% 20%,
+                    40% 50%,
+                    10% 80%,
+                    20% 90%,
+                    50% 60%,
+                    80% 90%,
+                    90% 80%,
+                    60% 50%,
+                    90% 20%,
+                    80% 10%,
+                    50% 40%);
+            clip-path: polygon(20% 10%,
+                    10% 20%,
+                    40% 50%,
+                    10% 80%,
+                    20% 90%,
+                    50% 60%,
+                    80% 90%,
+                    90% 80%,
+                    60% 50%,
+                    90% 20%,
+                    80% 10%,
+                    50% 40%);
+        }
+    </style>
+
+
+
+
+
+
+</head>
+
+<body translate="no">
+
+    <body ontouchstart="">
+        <div class="main-container">
+            <div class="number-input">
+                <div class="text text--title text--center js-number"></div>
+            </div>
+            <div class="numpad-container grid clearfix">
+                <div class="grid__cell btn ripple" data-value="1">
+                    <div class="btn__text">1</div>
+                </div>
+                <div class="grid__cell btn ripple" data-value="2">
+                    <div class="btn__text">2</div>
+                </div>
+                <div class="grid__cell btn ripple" data-value="3">
+                    <div class="btn__text">3</div>
+                </div>
+                <div class="grid__cell btn ripple" data-value="4">
+                    <div class="btn__text">4</div>
+                </div>
+                <div class="grid__cell btn ripple" data-value="5">
+                    <div class="btn__text">5</div>
+                </div>
+                <div class="grid__cell btn ripple" data-value="6">
+                    <div class="btn__text">6</div>
+                </div>
+                <div class="grid__cell btn ripple" data-value="7">
+                    <div class="btn__text">7</div>
+                </div>
+                <div class="grid__cell btn ripple" data-value="8">
+                    <div class="btn__text">8</div>
+                </div>
+                <div class="grid__cell btn ripple" data-value="9">
+                    <div class="btn__text">9</div>
+                </div>
+                <div class="grid__cell btn btn--asterisk ripple" data-value="*">
+                    <div class="btn__text">*</div>
+                </div>
+                <div class="grid__cell btn ripple" data-value="0">
+                    <div class="btn__text">0</div>
+                </div>
+                <div class="grid__cell btn btn--pound ripple" data-value="#">
+                    <div class="btn__text">#</div>
+                </div>
+                <div class="grid__cell btn btn--empty">
+                </div>
+                <div class="grid__cell btn btn--empty js-call">
+                    <div>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                            viewBox="0 0 50 50" width="100" xml:space="preserve">
+                            <style type="text/css">
+                                .st0 {
+                                    fill: #00E676;
+                                }
+
+                                .icon_logo_white {
+                                    fill: #FFFFFF;
+                                }
+                            </style>
+
+                            <path class="st0"
+                                d="M10.7,32.8l0.6,0.3c2.5,1.5,5.3,2.2,8.1,2.2l0,0c8.8,0,16-7.2,16-16c0-4.2-1.7-8.3-4.7-11.3         c-3-3-7-4.7-11.3-4.7c-8.8,0-16,7.2-15.9,16.1c0,3,0.9,5.9,2.4,8.4l0.4,0.6l-1.6,5.9L10.7,32.8z" />
+                            <path class="icon_logo_white"
+                                d="M32.4,6.4C29,2.9,24.3,1,19.5,1C9.3,1,1.1,9.3,1.2,19.4c0,3.2,0.9,6.3,2.4,9.1L1,38l9.7-2.5         c2.7,1.5,5.7,2.2,8.7,2.2l0,0c10.1,0,18.3-8.3,18.3-18.4C37.7,14.4,35.8,9.8,32.4,6.4z M19.5,34.6L19.5,34.6c-2.7,0-5.4-0.7-7.7-2.1         l-0.6-0.3l-5.8,1.5L6.9,28l-0.4-0.6c-4.4-7.1-2.3-16.5,4.9-20.9s16.5-2.3,20.9,4.9s2.3,16.5-4.9,20.9C25.1,33.8,22.3,34.6,19.5,34.6         z M28.3,23.5L27.2,23c0,0-1.6-0.7-2.6-1.2c-0.1,0-0.2-0.1-0.3-0.1c-0.3,0-0.5,0.1-0.7,0.2l0,0c0,0-0.1,0.1-1.5,1.7         c-0.1,0.2-0.3,0.3-0.5,0.3h-0.1c-0.1,0-0.3-0.1-0.4-0.2l-0.5-0.2l0,0c-1.1-0.5-2.1-1.1-2.9-1.9c-0.2-0.2-0.5-0.4-0.7-0.6         c-0.7-0.7-1.4-1.5-1.9-2.4l-0.1-0.2c-0.1-0.1-0.1-0.2-0.2-0.4c0-0.2,0-0.4,0.1-0.5c0,0,0.4-0.5,0.7-0.8c0.2-0.2,0.3-0.5,0.5-0.7         c0.2-0.3,0.3-0.7,0.2-1c-0.1-0.5-1.3-3.2-1.6-3.8c-0.2-0.3-0.4-0.4-0.7-0.5h-0.3c-0.2,0-0.5,0-0.8,0c-0.2,0-0.4,0.1-0.6,0.1         l-0.1,0.1c-0.2,0.1-0.4,0.3-0.6,0.4c-0.2,0.2-0.3,0.4-0.5,0.6c-0.7,0.9-1.1,2-1.1,3.1l0,0c0,0.8,0.2,1.6,0.5,2.3l0.1,0.3         c0.9,1.9,2.1,3.6,3.7,5.1l0.4,0.4c0.3,0.3,0.6,0.5,0.8,0.8c2.1,1.8,4.5,3.1,7.2,3.8c0.3,0.1,0.7,0.1,1,0.2l0,0c0.3,0,0.7,0,1,0         c0.5,0,1.1-0.2,1.5-0.4c0.3-0.2,0.5-0.2,0.7-0.4l0.2-0.2c0.2-0.2,0.4-0.3,0.6-0.5c0.2-0.2,0.4-0.4,0.5-0.6c0.2-0.4,0.3-0.9,0.4-1.4         c0-0.2,0-0.5,0-0.7C28.6,23.7,28.5,23.6,28.3,23.5z" />
+
+                        </svg>
+
+                    </div>
+                </div>
+                <div class="grid__cell">
+                    <div class="back-btn">
+                        <div class="back-btn__icon ripple"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+    <script src='https://rawgit.com/ngryman/jquery.finger/v0.1.2/dist/jquery.finger.js'></script>
+    <script id="rendered-js">
+        $('.btn:not(".btn--empty")').on('click', function () {
+            number += $(this).data('value')
+            render()
+        })
+
+        $('.back-btn').on('click', function () {
+            number = number.slice(0, -1)
+            render()
+        })
+
+        $('.js-call').off('click').click(function () {
+            if (!number) {
+                return
+            }
+            window.location = `https://api.whatsapp.com/send?phone=852${number}`
+        })
+
+        $('.back-btn').on('press', function (e) {
+            number = '';
+            render()
+        });
+
+        var number = '';
+
+        function render() {
+            $('.js-number').text(number)
+            if (!number) {
+                $('.back-btn').hide()
+            } else {
+                $('.back-btn').show()
+            }
+        }
+
+        render()
+    </script>
+
+
+
+</body>
+
+</html>
