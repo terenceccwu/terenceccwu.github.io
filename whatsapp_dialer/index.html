@@ -311,7 +311,8 @@
             render()
         })
 
-        $('.js-call').on('vmousedown', function () {
+        // cannot use vmousedown, otherwise, will observe address bar when redirecting
+        $('.js-call').click(function () {
             if (!number) {
                 return
             }
