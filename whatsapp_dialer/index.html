@@ -301,6 +301,8 @@
     <script src='https://code.jquery.com/mobile/1.5.0-rc1/jquery.mobile-1.5.0-rc1.min.js'></script>
     <script src='https://rawgit.com/ngryman/jquery.finger/v0.1.2/dist/jquery.finger.js'></script>
     <script id="rendered-js">
+        $.mobile.loading().hide();
+
         $('.btn:not(".btn--empty,.js-call")').on('vmousedown', function () {
             number += $(this).data('value')
             render()
