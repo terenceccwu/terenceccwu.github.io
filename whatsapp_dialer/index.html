@@ -317,8 +317,10 @@
             if (!number) {
                 return
             }
-            window.dataLayer.push({'event':'Click Dial'});
-            window.location = `https://api.whatsapp.com/send?phone=852${number}`
+            window.dataLayer.push({'event':'Click Dial', 'eventCallback': function() {
+                window.location = `https://api.whatsapp.com/send?phone=852${number}`
+            } });
+
         })
 
         $('.back-btn').on('press', function (e) {
