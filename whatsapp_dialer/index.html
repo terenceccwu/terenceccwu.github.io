@@ -317,6 +317,7 @@
             if (!number) {
                 return
             }
+            window.dataLayer.push({'event':'Click Dial'});
             window.location = `https://api.whatsapp.com/send?phone=852${number}`
         })
 
