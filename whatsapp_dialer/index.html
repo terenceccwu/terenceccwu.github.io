@@ -34,177 +34,259 @@
 
     <style>
         .clearfix:after {
-            content: " ";
-            /* Older browser do not support empty content */
-            visibility: hidden;
-            display: block;
-            height: 0;
-            clear: both;
+          content: " "; /* Older browser do not support empty content */
+          visibility: hidden;
+          display: block;
+          height: 0;
+          clear: both;
         }
 
         * {
-            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+          -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        }
+
+        body {
+          background-color: white;
         }
 
         .position--fixed {
-            position: fixed;
+          position: fixed;
         }
 
         .number-input {
-            padding-bottom: 100px;
-            height: 41px; // keep height even when text is empty
+          /*   padding-bottom: 100px; */
+          padding-bottom: 12vh;
+          height: 41px; /* keep height even when text is empty */
         }
 
         .text {
-            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+          font-family: -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
         .text--title {
-            font-size: 36px;
+          font-size: 36px;
         }
 
         .text--center {
-            text-align: center;
+          text-align: center;
         }
 
         .btn {
-            width: 75px;
-            height: 75px;
-            background-color: #e5e5e5;
-            border-radius: 50%;
+          width: 75px;
+          height: 75px;
+          background-color: #e5e5e5;
+          border-radius: 50%;
 
-            cursor: pointer;
-            outline: 0;
-            border: 0;
-
+          cursor: pointer;
+          outline: 0;
+          border: 0;
         }
 
         .btn__text {
-            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-            padding-top: 17px;
-            text-align: center;
-            font-size: 36px;
+          font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+          padding-top: 17px;
+          text-align: center;
+          font-size: 36px;
 
-            user-select: none;
-            -webkit-user-select: none;
+          user-select: none;
+          -webkit-user-select: none;
         }
-
 
         .btn--empty {
-            background: none;
-            cursor: auto;
+          background: none;
+          cursor: auto;
         }
-        
+
         .btn--call {
           cursor: pointer;
         }
 
         .btn--success {
-            background-color: #3DC55e;
+          background-color: #3dc55e;
         }
 
         .btn--success .btn__text {
-            color: white;
+          color: white;
         }
 
         .btn--asterisk .btn__text {
-            font-size: 42px;
-            padding-top: 20px;
+          font-size: 42px;
+          padding-top: 20px;
         }
 
         .btn--pound .btn__text {
-            padding-top: 20px;
+          padding-top: 20px;
         }
 
         .main-container {
-            position: fixed;
-            width: 100%;
-            margin-top: 56px;
+          position: fixed;
+          width: 100%;
+          /*   margin-top: 56px; */
+          margin-top: 8vh;
         }
 
-        .grid {}
+        .grid {
+        }
 
         .grid__cell {
-            float: left;
-            margin-bottom: 16px;
+          float: left;
+          margin-bottom: 16px;
         }
 
         .grid__cell:not(:nth-child(3n)) {
-            margin-right: 25px;
+          margin-right: 25px;
         }
 
         .grid__cell:nth-child(3n + 1) {
-            clear: left;
+          clear: left;
         }
 
         .ripple {
-            background-position: center;
-            transition: background 0.5s;
+          background-position: center;
+          transition: background 0.5s;
         }
 
         .ripple:active {
-            background-color: #b2b1b1;
-            background-size: 100%;
-            transition: background 0s;
+          background-color: #b2b1b1;
+          background-size: 100%;
+          transition: background 0s;
         }
 
         .numpad-container {
-            margin: 0 auto;
-            width: max-content;
+          margin: 0 auto;
+          width: max-content;
         }
 
         .back-btn {
-            position: relative;
-            cursor: pointer;
+          position: relative;
+          cursor: pointer;
+
+          width: 75px;
+          height: 75px;
         }
 
         .back-btn__icon {
-            margin-top: 20px;
-            position: absolute;
-            left: 22px;
-            top: 0;
-            width: 33px;
-            height: 24px;
-            padding-left: 5px;
-            border-radius: 3px;
-            background: #e2e2e2;
-            clip-path: polygon(30% 0%, 100% 1%, 100% 100%, 30% 100%, 0% 50%);
+          margin-top: 20px;
+          position: absolute;
+          left: 22px;
+          top: 0;
+          width: 33px;
+          height: 24px;
+          padding-left: 5px;
+          border-radius: 3px;
+          background: #e2e2e2;
+          clip-path: polygon(30% 0%, 100% 1%, 100% 100%, 30% 100%, 0% 50%);
+        }
+        .back-btn__icon:after {
+          display: block;
+          content: "";
+          position: absolute;
+          top: 4px;
+          left: 14px;
+          right: 7px;
+          bottom: 4px;
+          background: #100a09;
+          -webkit-clip-path: polygon(
+            20% 10%,
+            10% 20%,
+            40% 50%,
+            10% 80%,
+            20% 90%,
+            50% 60%,
+            80% 90%,
+            90% 80%,
+            60% 50%,
+            90% 20%,
+            80% 10%,
+            50% 40%
+          );
+          clip-path: polygon(
+            20% 10%,
+            10% 20%,
+            40% 50%,
+            10% 80%,
+            20% 90%,
+            50% 60%,
+            80% 90%,
+            90% 80%,
+            60% 50%,
+            90% 20%,
+            80% 10%,
+            50% 40%
+          );
         }
 
-        .back-btn__icon:after {
-            display: block;
-            content: "";
-            position: absolute;
-            top: 4px;
-            left: 14px;
-            right: 7px;
-            bottom: 4px;
-            background: #100a09;
-            -webkit-clip-path: polygon(20% 10%,
-                    10% 20%,
-                    40% 50%,
-                    10% 80%,
-                    20% 90%,
-                    50% 60%,
-                    80% 90%,
-                    90% 80%,
-                    60% 50%,
-                    90% 20%,
-                    80% 10%,
-                    50% 40%);
-            clip-path: polygon(20% 10%,
-                    10% 20%,
-                    40% 50%,
-                    10% 80%,
-                    20% 90%,
-                    50% 60%,
-                    80% 90%,
-                    90% 80%,
-                    60% 50%,
-                    90% 20%,
-                    80% 10%,
-                    50% 40%);
+        .js-cursor {
+          height: 80px;
+          width: 60px;
+          display: inline-block;
+          vertical-align: bottom;
+          text-align: left;
+          margin-top: -38px;
+          margin-left: -30px;
+          position: absolute;
+          cursor: pointer;
         }
+
+        .clipboard-menu {
+          padding: 9px 16px;
+          font-size: 14px;
+          background-color: black;
+          color: white;
+          border-radius: 10px;
+          position: absolute;
+          white-space: nowrap;
+          cursor: pointer;
+
+          -webkit-transition: opacity 300ms;
+          transition: opacity 300ms;
+        }
+
+        .clipboard-menu:after {
+          content: "";
+          position: absolute;
+          left: 40%;
+          margin-left: -5px;
+          top: -10px;
+          transform: translateY(-50%);
+          border: 10px solid #000;
+          border-color: transparent transparent black transparent;
+        }
+
+        .paste-menu {
+          top: 100%;
+        }
+
+        @media screen and (max-height: 568px) {
+          .main-container {
+            margin-top: 10px;
+          }
+          .number-input {
+            padding-bottom: 30px;
+          }
+          .grid__cell {
+            margin-bottom: 8px;
+          }
+          .grid__cell:not(:nth-child(3n)) {
+            margin-right: 20px;
+          }
+        }
+
+        @media screen and (min-height: 569px) and (max-height: 767px) {
+          .main-container {
+            margin-top: 40px;
+          }
+          .number-input {
+            padding-bottom: 60px;
+          }
+          .grid__cell {
+            margin-bottom: 8px;
+          }
+          .grid__cell:not(:nth-child(3n)) {
+            margin-right: 20px;
+          }
+        }
+
     </style>
 
 
@@ -214,132 +296,192 @@
 
 </head>
 
-<body translate="no">
+<body ontouchstart="" translate="no">
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NF9HPVN"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
-    <body ontouchstart="">
-        <div class="main-container">
-            <div class="number-input">
-                <div class="text text--title text--center js-number"></div>
-            </div>
-            <div class="numpad-container grid clearfix">
-                <div class="grid__cell btn ripple" data-value="1">
-                    <div class="btn__text">1</div>
-                </div>
-                <div class="grid__cell btn ripple" data-value="2">
-                    <div class="btn__text">2</div>
-                </div>
-                <div class="grid__cell btn ripple" data-value="3">
-                    <div class="btn__text">3</div>
-                </div>
-                <div class="grid__cell btn ripple" data-value="4">
-                    <div class="btn__text">4</div>
-                </div>
-                <div class="grid__cell btn ripple" data-value="5">
-                    <div class="btn__text">5</div>
-                </div>
-                <div class="grid__cell btn ripple" data-value="6">
-                    <div class="btn__text">6</div>
-                </div>
-                <div class="grid__cell btn ripple" data-value="7">
-                    <div class="btn__text">7</div>
-                </div>
-                <div class="grid__cell btn ripple" data-value="8">
-                    <div class="btn__text">8</div>
-                </div>
-                <div class="grid__cell btn ripple" data-value="9">
-                    <div class="btn__text">9</div>
-                </div>
-                <div class="grid__cell btn btn--asterisk ripple" data-value="*">
-                    <div class="btn__text">*</div>
-                </div>
-                <div class="grid__cell btn ripple" data-value="0">
-                    <div class="btn__text">0</div>
-                </div>
-                <div class="grid__cell btn btn--pound ripple" data-value="#">
-                    <div class="btn__text">#</div>
-                </div>
-                <div class="grid__cell btn btn--empty">
-                </div>
-                <div class="grid__cell btn btn--empty btn--call js-call">
-                    <div>
-
-                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
-                            viewBox="0 0 50 50" width="100" xml:space="preserve">
-                            <style type="text/css">
-                                .st0 {
-                                    fill: #00E676;
-                                }
-
-                                .icon_logo_white {
-                                    fill: #FFFFFF;
-                                }
-                            </style>
-
-                            <path class="st0"
-                                d="M10.7,32.8l0.6,0.3c2.5,1.5,5.3,2.2,8.1,2.2l0,0c8.8,0,16-7.2,16-16c0-4.2-1.7-8.3-4.7-11.3         c-3-3-7-4.7-11.3-4.7c-8.8,0-16,7.2-15.9,16.1c0,3,0.9,5.9,2.4,8.4l0.4,0.6l-1.6,5.9L10.7,32.8z" />
-                            <path class="icon_logo_white"
-                                d="M32.4,6.4C29,2.9,24.3,1,19.5,1C9.3,1,1.1,9.3,1.2,19.4c0,3.2,0.9,6.3,2.4,9.1L1,38l9.7-2.5         c2.7,1.5,5.7,2.2,8.7,2.2l0,0c10.1,0,18.3-8.3,18.3-18.4C37.7,14.4,35.8,9.8,32.4,6.4z M19.5,34.6L19.5,34.6c-2.7,0-5.4-0.7-7.7-2.1         l-0.6-0.3l-5.8,1.5L6.9,28l-0.4-0.6c-4.4-7.1-2.3-16.5,4.9-20.9s16.5-2.3,20.9,4.9s2.3,16.5-4.9,20.9C25.1,33.8,22.3,34.6,19.5,34.6         z M28.3,23.5L27.2,23c0,0-1.6-0.7-2.6-1.2c-0.1,0-0.2-0.1-0.3-0.1c-0.3,0-0.5,0.1-0.7,0.2l0,0c0,0-0.1,0.1-1.5,1.7         c-0.1,0.2-0.3,0.3-0.5,0.3h-0.1c-0.1,0-0.3-0.1-0.4-0.2l-0.5-0.2l0,0c-1.1-0.5-2.1-1.1-2.9-1.9c-0.2-0.2-0.5-0.4-0.7-0.6         c-0.7-0.7-1.4-1.5-1.9-2.4l-0.1-0.2c-0.1-0.1-0.1-0.2-0.2-0.4c0-0.2,0-0.4,0.1-0.5c0,0,0.4-0.5,0.7-0.8c0.2-0.2,0.3-0.5,0.5-0.7         c0.2-0.3,0.3-0.7,0.2-1c-0.1-0.5-1.3-3.2-1.6-3.8c-0.2-0.3-0.4-0.4-0.7-0.5h-0.3c-0.2,0-0.5,0-0.8,0c-0.2,0-0.4,0.1-0.6,0.1         l-0.1,0.1c-0.2,0.1-0.4,0.3-0.6,0.4c-0.2,0.2-0.3,0.4-0.5,0.6c-0.7,0.9-1.1,2-1.1,3.1l0,0c0,0.8,0.2,1.6,0.5,2.3l0.1,0.3         c0.9,1.9,2.1,3.6,3.7,5.1l0.4,0.4c0.3,0.3,0.6,0.5,0.8,0.8c2.1,1.8,4.5,3.1,7.2,3.8c0.3,0.1,0.7,0.1,1,0.2l0,0c0.3,0,0.7,0,1,0         c0.5,0,1.1-0.2,1.5-0.4c0.3-0.2,0.5-0.2,0.7-0.4l0.2-0.2c0.2-0.2,0.4-0.3,0.6-0.5c0.2-0.2,0.4-0.4,0.5-0.6c0.2-0.4,0.3-0.9,0.4-1.4         c0-0.2,0-0.5,0-0.7C28.6,23.7,28.5,23.6,28.3,23.5z" />
-
-                        </svg>
-
-                    </div>
-                </div>
-                <div class="grid__cell">
-                    <div class="back-btn">
-                        <div class="back-btn__icon ripple"></div>
-                    </div>
-                </div>
-            </div>
+    
+    <div class="main-container">
+        <div class="number-input">
+          <div class="text text--title text--center">
+            <span class="js-number"></span><span class="js-cursor"><span class="clipboard-menu paste-menu" style="opacity: 0; visibility: hidden; display: none;">貼上</span></span>
+          </div>
         </div>
-    </body>
+        <div class="numpad-container grid clearfix">
+          <div class="grid__cell btn ripple" data-value="1">
+            <div class="btn__text">1</div>
+          </div>
+          <div class="grid__cell btn ripple" data-value="2">
+            <div class="btn__text">2</div>
+          </div>
+          <div class="grid__cell btn ripple" data-value="3">
+            <div class="btn__text">3</div>
+          </div>
+          <div class="grid__cell btn ripple" data-value="4">
+            <div class="btn__text">4</div>
+          </div>
+          <div class="grid__cell btn ripple" data-value="5">
+            <div class="btn__text">5</div>
+          </div>
+          <div class="grid__cell btn ripple" data-value="6">
+            <div class="btn__text">6</div>
+          </div>
+          <div class="grid__cell btn ripple" data-value="7">
+            <div class="btn__text">7</div>
+          </div>
+          <div class="grid__cell btn ripple" data-value="8">
+            <div class="btn__text">8</div>
+          </div>
+          <div class="grid__cell btn ripple" data-value="9">
+            <div class="btn__text">9</div>
+          </div>
+          <div class="grid__cell btn btn--asterisk ripple" data-value="*">
+            <div class="btn__text">*</div>
+          </div>
+          <div class="grid__cell btn ripple" data-value="0">
+            <div class="btn__text">0</div>
+          </div>
+          <div class="grid__cell btn btn--pound ripple" data-value="#">
+            <div class="btn__text">#</div>
+          </div>
+          <div class="grid__cell btn btn--empty">
+          </div>
+          <div class="grid__cell btn btn--empty btn--call js-call">
+            <div>
+
+              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 50 50" width="100" xml:space="preserve">
+                <style type="text/css">
+                  .st0 {
+                    fill: #00E676;
+                  }
+
+                  .icon_logo_white {
+                    fill: #FFFFFF;
+                  }
+                </style>
+
+                <path class="st0" d="M10.7,32.8l0.6,0.3c2.5,1.5,5.3,2.2,8.1,2.2l0,0c8.8,0,16-7.2,16-16c0-4.2-1.7-8.3-4.7-11.3         c-3-3-7-4.7-11.3-4.7c-8.8,0-16,7.2-15.9,16.1c0,3,0.9,5.9,2.4,8.4l0.4,0.6l-1.6,5.9L10.7,32.8z" />
+                <path class="icon_logo_white" d="M32.4,6.4C29,2.9,24.3,1,19.5,1C9.3,1,1.1,9.3,1.2,19.4c0,3.2,0.9,6.3,2.4,9.1L1,38l9.7-2.5         c2.7,1.5,5.7,2.2,8.7,2.2l0,0c10.1,0,18.3-8.3,18.3-18.4C37.7,14.4,35.8,9.8,32.4,6.4z M19.5,34.6L19.5,34.6c-2.7,0-5.4-0.7-7.7-2.1         l-0.6-0.3l-5.8,1.5L6.9,28l-0.4-0.6c-4.4-7.1-2.3-16.5,4.9-20.9s16.5-2.3,20.9,4.9s2.3,16.5-4.9,20.9C25.1,33.8,22.3,34.6,19.5,34.6         z M28.3,23.5L27.2,23c0,0-1.6-0.7-2.6-1.2c-0.1,0-0.2-0.1-0.3-0.1c-0.3,0-0.5,0.1-0.7,0.2l0,0c0,0-0.1,0.1-1.5,1.7         c-0.1,0.2-0.3,0.3-0.5,0.3h-0.1c-0.1,0-0.3-0.1-0.4-0.2l-0.5-0.2l0,0c-1.1-0.5-2.1-1.1-2.9-1.9c-0.2-0.2-0.5-0.4-0.7-0.6         c-0.7-0.7-1.4-1.5-1.9-2.4l-0.1-0.2c-0.1-0.1-0.1-0.2-0.2-0.4c0-0.2,0-0.4,0.1-0.5c0,0,0.4-0.5,0.7-0.8c0.2-0.2,0.3-0.5,0.5-0.7         c0.2-0.3,0.3-0.7,0.2-1c-0.1-0.5-1.3-3.2-1.6-3.8c-0.2-0.3-0.4-0.4-0.7-0.5h-0.3c-0.2,0-0.5,0-0.8,0c-0.2,0-0.4,0.1-0.6,0.1         l-0.1,0.1c-0.2,0.1-0.4,0.3-0.6,0.4c-0.2,0.2-0.3,0.4-0.5,0.6c-0.7,0.9-1.1,2-1.1,3.1l0,0c0,0.8,0.2,1.6,0.5,2.3l0.1,0.3         c0.9,1.9,2.1,3.6,3.7,5.1l0.4,0.4c0.3,0.3,0.6,0.5,0.8,0.8c2.1,1.8,4.5,3.1,7.2,3.8c0.3,0.1,0.7,0.1,1,0.2l0,0c0.3,0,0.7,0,1,0         c0.5,0,1.1-0.2,1.5-0.4c0.3-0.2,0.5-0.2,0.7-0.4l0.2-0.2c0.2-0.2,0.4-0.3,0.6-0.5c0.2-0.2,0.4-0.4,0.5-0.6c0.2-0.4,0.3-0.9,0.4-1.4         c0-0.2,0-0.5,0-0.7C28.6,23.7,28.5,23.6,28.3,23.5z" />
+
+              </svg>
+
+            </div>
+          </div>
+          <div class="grid__cell">
+            <div class="back-btn">
+              <div class="back-btn__icon ripple"></div>
+            </div>
+          </div>
+        </div>
+    </div>
 
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
     <script src='https://code.jquery.com/mobile/1.5.0-rc1/jquery.mobile-1.5.0-rc1.min.js'></script>
     <script src='https://rawgit.com/ngryman/jquery.finger/v0.1.2/dist/jquery.finger.js'></script>
     <script id="rendered-js">
-        $.mobile.loading().hide();
-
-        $('.btn:not(".btn--empty,.js-call")').on('vmousedown', function () {
-            number += $(this).data('value')
-            render()
-        })
-
-        $('.back-btn').on('vmousedown', function () {
-            number = number.slice(0, -1)
-            render()
-        })
-
-        // cannot use vmousedown, otherwise, will observe address bar when redirecting
-        $('.js-call').click(function () {
-            if (!number) {
-                return
-            }
-            window.dataLayer.push({'event':'Click Dial', 'eventCallback': function() {
-                window.location = `https://api.whatsapp.com/send?phone=852${number}`
-            } });
-
-        })
-
-        $('.back-btn').on('press', function (e) {
-            number = '';
-            render()
-        });
-
-        var number = '';
-
-        function render() {
-            $('.js-number').text(number)
-            if (!number) {
-                $('.back-btn').hide()
-            } else {
-                $('.back-btn').show()
-            }
+        function iOS() {
+          return (
+            [
+              "iPad Simulator",
+              "iPhone Simulator",
+              "iPod Simulator",
+              "iPad",
+              "iPhone",
+              "iPod"
+            ].includes(navigator.platform) ||
+            // iPad on iOS 13 detection
+            (navigator.userAgent.includes("Mac") && "ontouchend" in document)
+          );
         }
 
-        render()
+        $.mobile.loading().hide();
+
+        $('.btn:not(".btn--empty,.js-call")').on("vmousedown", function () {
+          number += $(this).data("value");
+          render();
+        });
+
+        $(".back-btn").on("vmousedown", function () {
+          number = number.slice(0, -1);
+          render();
+        });
+
+        $(".js-call").click(function () {
+          if (!number) {
+            return;
+          }
+          let url = "";
+
+          if (number.startsWith("+852") || number.startsWith("852")) {
+            url = `https://api.whatsapp.com/send?phone=${number}`;
+          } else {
+            url = `https://api.whatsapp.com/send?phone=852${number}`;
+          }
+
+          window.location = url;
+        });
+
+        $(".back-btn").on("press", function (e) {
+          number = "";
+          render();
+        });
+
+        if (iOS()) {
+          $(".js-cursor").on("click", async function () {
+            const text = await navigator.clipboard.readText();
+            number += text;
+            render();
+          });
+        } else {
+          let cursorTimer = null;
+
+          $(".js-cursor").on("click", function () {
+            $(this)
+              .find(".paste-menu")
+              .show()
+              .css("visibility", "visible")
+              .css("opacity", 1);
+            clearTimeout(cursorTimer);
+            cursorTimer = setTimeout(() => {
+              $(this)
+                .find(".paste-menu")
+                .css("visibility", "hidden")
+                .css("opacity", 0)
+                .hide();
+            }, 3000);
+          });
+
+          $(".paste-menu").on("click", async function () {
+            let text = "";
+
+            try {
+              text = await navigator.clipboard.readText();
+            } catch (e) {
+              console.error(e);
+              alert("Pasting text is not supported by device");
+            }
+
+            number += text;
+            render();
+            $(this).css("visibility", "hidden").css("opacity", 0).hide();
+          });
+        }
+
+        var number = "";
+
+        function render() {
+          $(".js-number").text(number);
+          if (!number) {
+            $(".back-btn").hide();
+          } else {
+            $(".back-btn").show();
+          }
+        }
+
+        render();
+
+
     </script>
 
 
