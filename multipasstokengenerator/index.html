@@ -1,0 +1,72 @@
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+<meta content="utf-8" http-equiv="encoding">
+<!-- Google Fonts -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+<!-- CSS Reset -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+<!-- Milligram CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
+</head>
+
+<body>
+<div id="app">
+<div class="container">
+  <h1>Multipass Token Encode</h1>
+  <fieldset>
+    <label for="secret">Secret</label>
+    <input type="text" id="secret" v-model="secret">
+
+    <label for="iv">AES Initialization Vector (iv) (optional)</label>
+    <input type="text" id="iv" v-model="iv">
+
+    <label for="data">JSON data</label>
+    <textarea id="data" v-model="data"></textarea>
+
+    <hr/>
+
+    <label for="token">Token</label>
+    <textarea id="token" disabled="disabled" v-bind:value="token"></textarea>
+  </fieldset>
+</div>
+</div>
+
+
+<script src="./multipass.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+<script src="https://unpkg.com/vue-async-computed@3.9.0"></script>
+
+<script>
+  Vue.use(AsyncComputed);
+  new Vue({
+    el: '#app',
+    data: () => ({
+      secret: 'multipass secret from shop admin',
+      iv: '468094f4e6d6a50ce3f12c9dca6813cd',
+      data: '{"email":"bob@shopify.com","remote_ip":"107.20.160.121"}',
+    }),
+    asyncComputed: {
+      async token() {
+        if (!this.secret) {
+          return ''
+        }
+
+        try {
+          const m = new Multipass(this.secret, this.iv);
+          return await m.encode(this.data);
+        } catch(e) {
+          console.error(e)
+          return '';
+        }
+      }
+    }
+  });
+</script>
+</body>
+
+
+</html>
+
+
