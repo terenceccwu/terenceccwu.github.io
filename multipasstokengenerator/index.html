@@ -26,7 +26,7 @@
     <button class="button button-clear" v-on:click="formatJson">format</button>
     <button class="button button-clear" v-on:click="insertTimestamp">insert timestamp</button>
 
-    <template v-if="variant == 'sl'>
+    <template v-if="variant == 'sl'">
       <label for="shop_url">Shop URL</label>
       <input type="text" id="shop_url" v-model="slShopUrl">
     </template>
@@ -36,7 +36,7 @@
     <label for="token">Token</label>
     <textarea id="token" disabled="disabled" v-bind:value="token"></textarea>
 
-    <template v-if="variant == 'sl'>
+    <template v-if="variant == 'sl'">
       <a class="button button-clear" v-bind:href="loginUrl" target="new">open login url</button>
     </template>
   </fieldset>
@@ -44,7 +44,7 @@
 </div>
 
 
-<script src="./multipass.js"></script>
+<script src="https://terenceccwu.github.io/multipasstokengenerator/multipass.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
 <script src="https://unpkg.com/vue-async-computed@3.9.0"></script>
@@ -56,17 +56,23 @@
   }
   const toQueryString = (obj) => new URLSearchParams(obj).toString();
 
+  const qs = parseQueryString(window.location.search)
+
   Vue.use(AsyncComputed);
   new Vue({
     el: '#app',
     data: () => {
-      const qs = parseQueryString(window.location.search)
       return {
         secret: qs.secret || 'multipass secret from shop admin',
         iv: qs.iv || '468094f4e6d6a50ce3f12c9dca6813cd',
         data: qs.data || '{"email":"bob@example.com"}',
         variant: qs.variant,
         slShopUrl: qs.sl_shop_url || '',
+      }
+    },
+    created() {
+      if (qs.insert_timestamp == 'true') {
+          this.insertTimestamp()
       }
     },
     methods: {
@@ -105,5 +111,3 @@
 
 
 </html>
-
-
