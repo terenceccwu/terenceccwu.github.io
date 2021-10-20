@@ -39,6 +39,7 @@
     <template v-if="variant == 'sl'">
       <a class="button button-clear" v-bind:href="loginUrl" target="new">open login url</button>
     </template>
+    <a class="button button-clear" v-bind:href="shareUrl" target="new">get link to current config</button>
   </fieldset>
 </div>
 </div>
@@ -51,10 +52,20 @@
 
 <script>
   const parseQueryString = (qs) => {
+    if (!qs || qs.length == 0) {
+      return {}
+    }
     qs = qs.substring(1);
-    return JSON.parse('{"' + decodeURI(qs).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}');
+    return JSON.parse('{"' + decodeURIComponent(qs).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}');
   }
-  const toQueryString = (obj) => new URLSearchParams(obj).toString();
+  const toQueryString = (obj) => {
+    var str = [];
+    for (var p in obj)
+      if (obj.hasOwnProperty(p)) {
+        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+      }
+    return str.join("&");
+  }
 
   const qs = parseQueryString(window.location.search)
 
@@ -72,7 +83,7 @@
     },
     created() {
       if (qs.insert_timestamp == 'true') {
-          this.insertTimestamp()
+        this.insertTimestamp()
       }
     },
     methods: {
@@ -103,6 +114,18 @@
     computed: {
       loginUrl() {
         return `${this.slShopUrl}/users/sign_in/multipass/${this.token}`;
+      },
+      shareUrl() {
+        const { protocol, host, pathname } = window.location;
+        const fullUrlWithoutParams = `${protocol}//${host}${pathname}`;
+        const qs = toQueryString({
+          secret: this.secret,
+          iv: this.iv,
+          data: this.data,
+          variant: this.variant,
+          sl_shop_url: this.slShopUrl,
+        })
+        return `${fullUrlWithoutParams}?${qs}`;
       }
     }
   });
