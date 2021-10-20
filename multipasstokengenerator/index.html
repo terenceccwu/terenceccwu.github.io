@@ -23,6 +23,8 @@
 
     <label for="data">JSON data</label>
     <textarea id="data" v-model="data"></textarea>
+    <button class="button button-clear" v-on:click="formatJson">format</button>
+    <button class="button button-clear" v-on:click="insertTimestamp">insert timestamp</button>
 
     <hr/>
 
@@ -47,6 +49,16 @@
       iv: '468094f4e6d6a50ce3f12c9dca6813cd',
       data: '{"email":"bob@shopify.com","remote_ip":"107.20.160.121"}',
     }),
+    methods: {
+      formatJson() {
+        this.data = JSON.stringify(JSON.parse(this.data))
+      },
+      insertTimestamp() {
+        const data = JSON.parse(this.data)
+        data.created_at = Math.floor(new Date() / 1000)
+        this.data = JSON.stringify(data)
+      }
+    },
     asyncComputed: {
       async token() {
         if (!this.secret) {
